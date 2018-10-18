@@ -1,0 +1,7 @@
+node_modules
+built
+projects.json
+entries/**/pkg
+entries/**/bin
+entries/**/wasm-pack.log
+**log.txt
