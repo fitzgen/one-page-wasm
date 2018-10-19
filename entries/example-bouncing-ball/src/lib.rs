@@ -15,19 +15,12 @@ struct Color {
 }
 
 impl Color {
-    const BLACK: Color = Color {
-        r: 0,
-        g: 0,
-        b: 0,
-        a: 255,
-    };
-
-    const WHITE: Color = Color {
-        r: 255,
-        g: 255,
-        b: 255,
-        a: 255,
-    };
+    fn rotate(&mut self) {
+        let b = self.b;
+        self.b = self.g;
+        self.g = self.r;
+        self.r = b;
+    }
 }
 
 const WIDTH: usize = 256;
@@ -91,8 +84,19 @@ static mut BALL: Ball = Ball {
     radius: 10,
 };
 
-static mut BALL_COLOR: Color = Color::BLACK;
-static mut BG_COLOR: Color = Color::WHITE;
+static mut BALL_COLOR: Color = Color {
+    r: 10,
+    g: 20,
+    b: 175,
+    a: 255,
+};
+
+static mut BG_COLOR: Color = Color {
+    r: 240,
+    g: 200,
+    b: 70,
+    a: 255,
+};
 
 #[wasm_bindgen]
 pub fn frame(frame_buffer: &mut [u8], key_down: bool) {
@@ -115,6 +119,8 @@ pub fn frame(frame_buffer: &mut [u8], key_down: bool) {
     unsafe {
         BALL.draw(frame_buffer, unsafe { BALL_COLOR });
         if BALL.update() {
+            BALL_COLOR.rotate();
+            BG_COLOR.rotate();
             mem::swap(&mut BALL_COLOR, &mut BG_COLOR);
         }
     }
