@@ -30,7 +30,7 @@ for x in *; do
         echo "Build for $x failed!"
         echo "=== log ==="
         cat log.txt
-        continue
+        exit 1
     }
 
     wasm_file=$(pwd)/$(ls pkg/*.wasm)
@@ -45,7 +45,7 @@ for x in *; do
     echo "    total size: $total_size"
     if [[ "$total_size" -gt "$ONE_WASM_PAGE" ]]; then
         echo "    Project $x is $total_size bytes -- that's bigger than $ONE_WASM_PAGE!"
-        continue
+        exit 1
     fi
 
     # Create the webpack page that pulls in the wasm and js.
@@ -66,7 +66,7 @@ for x in *; do
         echo "webpack build for $x failed!"
         echo "=== log ==="
         cat log.txt
-        continue
+        exit 1
     }
 
     # Add the entry to the JSON.
