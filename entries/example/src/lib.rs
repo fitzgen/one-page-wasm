@@ -7,7 +7,7 @@ use wasm_bindgen::prelude::*;
 static mut TIME: u32 = 0;
 
 #[wasm_bindgen]
-pub fn frame(frame_buffer: &mut [u8]) {
+pub fn frame(frame_buffer: &mut [u8], _key_down: bool) {
     utils::set_panic_hook();
 
     let time = unsafe {

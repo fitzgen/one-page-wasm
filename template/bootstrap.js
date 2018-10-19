@@ -8,12 +8,17 @@ import("./XXX_MODULE.js")
 const HEIGHT = 256;
 const WIDTH = 256
 
+let keyDown = false;
+window.addEventListener("keydown", () => keyDown = true);
+
 async function main(mod) {
   const frameBuffer = new Uint8ClampedArray(HEIGHT * WIDTH * 4);
 
   while (true) {
-    mod.frame(frameBuffer);
+    mod.frame(frameBuffer, keyDown);
     render(frameBuffer);
+
+    keyDown = false;
     await new Promise(resolve => requestAnimationFrame(resolve));
   }
 }

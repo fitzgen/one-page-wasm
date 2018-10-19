@@ -95,12 +95,20 @@ static mut BALL_COLOR: Color = Color::BLACK;
 static mut BG_COLOR: Color = Color::WHITE;
 
 #[wasm_bindgen]
-pub fn frame(frame_buffer: &mut [u8]) {
+pub fn frame(frame_buffer: &mut [u8], key_down: bool) {
     utils::set_panic_hook();
 
     for y in 0..WIDTH {
         for x in 0..HEIGHT {
             set_pixel(frame_buffer, x, y, unsafe { BG_COLOR });
+        }
+    }
+
+    if key_down {
+        unsafe {
+            let tmp = BALL.velocity[0];
+            BALL.velocity[0] = BALL.velocity[1];
+            BALL.velocity[1] = -tmp;
         }
     }
 
