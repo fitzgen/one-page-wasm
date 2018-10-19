@@ -59,7 +59,7 @@ for x in *; do
     cp "$js_file" .
 
     # Make the bootstrap file import the correct module.
-    sed -i -e "s|XXX_MODULE|$x|g" bootstrap.js
+    sed -i -e "s|XXX_MODULE|$x|g" bootstrap.js index.html
 
     # Build the bundle with webpack!
     "$ROOT/node_modules/.bin/webpack" --config webpack.config.js >> log.txt 2>&1 || {
