@@ -11,12 +11,24 @@ const WIDTH = 256
 let keyDown = false;
 window.addEventListener("keydown", () => keyDown = true);
 
+let shouldStop = false;
+window.addEventListener("message", () => shouldStop = true);
+
 async function main(mod) {
   const frameBuffer = new Uint8ClampedArray(HEIGHT * WIDTH * 4);
 
   while (true) {
     mod.frame(frameBuffer, keyDown);
     render(frameBuffer);
+
+    // Always check this *after* rendering at least one frame, so that the index
+    // page gets its preview images.
+    if (shouldStop) {
+      [...document.body.querySelectorAll("*")]
+        .filter(e => e.tagName != "CANVAS")
+        .forEach(e => e.setAttribute("hidden", ""));
+      return;
+    }
 
     keyDown = false;
     await new Promise(resolve => requestAnimationFrame(resolve));
