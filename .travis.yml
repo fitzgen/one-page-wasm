@@ -18,3 +18,12 @@ install:
 
 script:
   - ./build.sh
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: .
+  keep-history: false
+  on:
+    branch: master
