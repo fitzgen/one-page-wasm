@@ -2,5 +2,29 @@
 // asynchronously. This `bootstrap.js` file does the single async import, so
 // that no one else needs to worry about it again.
 import("./XXX_MODULE.js")
-  .then(m => m.greet())
-  .catch(e => console.error("Error importing `XXX_MODULE.js`:", e));
+  .then(mod => main(mod))
+  .catch(e => console.error("Error:", e));
+
+const HEIGHT = 256;
+const WIDTH = 256
+
+async function main(mod) {
+  const frameBuffer = new Uint8ClampedArray(HEIGHT * WIDTH * 4);
+
+  while (true) {
+    mod.frame(frameBuffer);
+    render(frameBuffer);
+    await new Promise(resolve => requestAnimationFrame(resolve));
+  }
+}
+
+const canvas = document.getElementById("canvas");
+canvas.width = WIDTH;
+canvas.height = HEIGHT;
+
+const ctx = canvas.getContext("2d");
+
+function render(frameBuffer) {
+  let data = new ImageData(frameBuffer, WIDTH, HEIGHT);
+  ctx.putImageData(data, 0, 0);
+}
