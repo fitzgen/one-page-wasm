@@ -7,7 +7,7 @@ ROOT=$(pwd)
 
 ONE_WASM_PAGE=65536
 
-if test ! -d node_modules; then
+if test ! -d node_modules || "$CI" != ""; then
     npm install
 fi
 
