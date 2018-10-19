@@ -73,7 +73,7 @@ for x in *; do
     # Add the entry to the JSON.
     entry="{ \"name\": \"$x\" }"
     if [[ "$JSON" == "[" ]]; then
-        JSON=$'\n  '"$entry"
+        JSON="$JSON"$'\n  '"$entry"
     else
         JSON="$JSON"$',\n  '"$entry"
     fi
