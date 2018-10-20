@@ -21,6 +21,7 @@ lazy_static! {
                 Boid {
                     position: [x * 10.0 % WIDTH as f64, (y * 25.0 + 50.0) % HEIGHT as f64],
                     direction: x * y,
+                    color: COLORS[x as usize % COLORS.len()],
                 }
             }).collect()
     );
@@ -30,6 +31,7 @@ lazy_static! {
 struct Boid {
     position: [f64; 2],
     direction: f64,
+    color: Color,
 }
 
 impl Boid {
@@ -45,12 +47,7 @@ impl Boid {
                 buf,
                 (x + velocity[0] * i) as usize,
                 (y + velocity[1] * i) as usize,
-                Color {
-                    r: 0,
-                    g: 0,
-                    b: 0,
-                    a: 255,
-                },
+                self.color,
             );
         }
     }
@@ -150,6 +147,51 @@ struct Color {
     a: u8,
 }
 
+const COLORS: &[Color] = &[
+    Color {
+        r: 200,
+        g: 60,
+        b: 80,
+        a: 255,
+    },
+    Color {
+        r: 30,
+        g: 80,
+        b: 90,
+        a: 255,
+    },
+    Color {
+        r: 70,
+        g: 149,
+        b: 100,
+        a: 255,
+    },
+    Color {
+        r: 12,
+        g: 120,
+        b: 200,
+        a: 255,
+    },
+    Color {
+        r: 10,
+        g: 80,
+        b: 75,
+        a: 255,
+    },
+    Color {
+        r: 80,
+        g: 10,
+        b: 65,
+        a: 255,
+    },
+    Color {
+        r: 90,
+        g: 65,
+        b: 5,
+        a: 255,
+    },
+];
+
 const WIDTH: usize = 256;
 const HEIGHT: usize = 256;
 
@@ -186,16 +228,21 @@ pub fn frame(frame_buffer: &mut [u8], key_down: bool) {
         }
     }
 
+    if key_down {
+        let n = flock.len();
+        flock.push(Boid {
+            position: [128.0, 128.0],
+            direction: 0.0,
+            color: COLORS[n % COLORS.len()],
+        });
+    }
+
     let new_flock: Vec<_> = flock
         .iter()
         .enumerate()
         .map(|(i, b)| {
             b.draw(frame_buffer);
-            let mut next = b.next(i, &flock);
-            if key_down {
-                next.direction += f64::consts::PI * i as f64;
-            }
-            next
+            b.next(i, &flock)
         }).collect();
 
     *flock = new_flock;
