@@ -39,9 +39,9 @@ for x in *; do
     js_file=$(pwd)/$(ls pkg/*.js)
 
     # Check that the wasm and JS is less than 64K!
-    wasm_size=$(wc -c "$wasm_file" | cut -d " " -f 1)
+    wasm_size=$(wc -c "$wasm_file" | awk '{ print $1 }')
     echo "    size of wasm: $wasm_size"
-    js_size=$(wc -c "$js_file" | cut -d " " -f 1)
+    js_size=$(wc -c "$js_file" | awk '{ print $1 }')
     echo "    size of js: $js_size"
     total_size=$(( $js_size + $wasm_size ))
     echo "    total size: $total_size"
