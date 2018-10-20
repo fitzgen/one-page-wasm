@@ -11,9 +11,14 @@ use wasm_bindgen::prelude::*;
 
 const NUM_BOIDS: usize = 25;
 
+struct State {
+    flock: Vec<Boid>,
+    first_frame: bool,
+}
+
 lazy_static! {
-    static ref FLOCK: Mutex<Vec<Boid>> = Mutex::new(
-        (0..NUM_BOIDS)
+    static ref STATE: Mutex<State> = Mutex::new(State {
+        flock: (0..NUM_BOIDS)
             .zip(0..NUM_BOIDS)
             .map(|(x, y)| {
                 let x = x as f64;
@@ -23,8 +28,9 @@ lazy_static! {
                     direction: x * y,
                     color: COLORS[x as usize % COLORS.len()],
                 }
-            }).collect()
-    );
+            }).collect(),
+        first_frame: true,
+    });
 }
 
 #[derive(Copy, Clone)]
@@ -41,7 +47,7 @@ impl Boid {
         let velocity = [self.direction.sin(), self.direction.cos()];
         let x = self.position[0];
         let y = self.position[1];
-        for i in -3..4_i32 {
+        for i in 0..1_i32 {
             let i = i as f64;
             set_pixel(
                 buf,
@@ -200,18 +206,21 @@ fn set_pixel(buf: &mut [u8], x: usize, y: usize, color: Color) {
     if x >= WIDTH || y >= HEIGHT {
         return;
     }
-    buf[x * 4 + y * WIDTH * 4 + 0] = color.r;
-    buf[x * 4 + y * WIDTH * 4 + 1] = color.g;
-    buf[x * 4 + y * WIDTH * 4 + 2] = color.b;
-    buf[x * 4 + y * WIDTH * 4 + 3] = color.a;
+    let a = (color.a as f64) / 255.0;
+    let idx = x * 4 + y * WIDTH * 4;
+    buf[idx + 0] = (buf[idx + 0] as f64 * (1.0 - a) + color.r as f64 * a) as u8;
+    buf[idx + 1] = (buf[idx + 1] as f64 * (1.0 - a) + color.g as f64 * a) as u8;
+    buf[idx + 2] = (buf[idx + 2] as f64 * (1.0 - a) + color.b as f64 * a) as u8;
+    buf[idx + 3] = 255;
 }
 
 #[wasm_bindgen]
 pub fn frame(frame_buffer: &mut [u8], key_down: bool) {
     utils::set_panic_hook();
 
-    let mut flock = FLOCK.lock().unwrap();
+    let mut state = STATE.lock().unwrap();
 
+    let bg_alpha = if state.first_frame { 255 } else { 40 };
     for y in 0..WIDTH {
         for x in 0..HEIGHT {
             set_pixel(
@@ -222,28 +231,30 @@ pub fn frame(frame_buffer: &mut [u8], key_down: bool) {
                     r: 255,
                     g: 255,
                     b: 255,
-                    a: 255,
+                    a: bg_alpha,
                 },
             );
         }
     }
 
     if key_down {
-        let n = flock.len();
-        flock.push(Boid {
+        let n = state.flock.len();
+        state.flock.push(Boid {
             position: [128.0, 128.0],
             direction: 0.0,
             color: COLORS[n % COLORS.len()],
         });
     }
 
-    let new_flock: Vec<_> = flock
+    let new_flock: Vec<_> = state
+        .flock
         .iter()
         .enumerate()
         .map(|(i, b)| {
             b.draw(frame_buffer);
-            b.next(i, &flock)
+            b.next(i, &state.flock)
         }).collect();
 
-    *flock = new_flock;
+    state.flock = new_flock;
+    state.first_frame = false;
 }
