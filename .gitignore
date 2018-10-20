@@ -6,3 +6,4 @@ entries/**/pkg
 entries/**/bin
 entries/**/wasm-pack.log
 **log.txt
+**/wasm-pack.log
