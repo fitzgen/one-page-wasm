@@ -14,6 +14,13 @@ function renderProject(project) {
   const h3 = document.createElement("h3");
   h3.textContent = project.name;
 
+  const p = document.createElement("p");
+  const code = document.createElement("code");
+  code.textContent = `${project.size.total}`;
+  p.appendChild(code);
+  const text = document.createTextNode(" bytes");
+  p.appendChild(text);
+
   const iframe = document.createElement("iframe");
   iframe.src = projectUrl;
   iframe.addEventListener("load", () => {
@@ -21,6 +28,7 @@ function renderProject(project) {
   });
 
   a.appendChild(h3);
+  a.appendChild(p);
   a.append(iframe);
   li.appendChild(a);
   entries.appendChild(li);

@@ -63,6 +63,9 @@ for x in *; do
     # Make the bootstrap file import the correct module.
     underscore_x=${x//-/_}
     sed -i -e "s|XXX_MODULE|$underscore_x|g" bootstrap.js index.html
+    sed -i -e "s|XXX_JS_SIZE|$js_size|g" bootstrap.js index.html
+    sed -i -e "s|XXX_WASM_SIZE|$wasm_size|g" bootstrap.js index.html
+    sed -i -e "s|XXX_TOTAL_SIZE|$total_size|g" bootstrap.js index.html
 
     # Build the bundle with webpack!
     "$ROOT/node_modules/.bin/webpack" --config webpack.config.js >> log.txt 2>&1 || {
@@ -73,7 +76,7 @@ for x in *; do
     }
 
     # Add the entry to the JSON.
-    entry="{ \"name\": \"$x\" }"
+    entry="{ \"name\": \"$x\", \"size\": { \"total\": $total_size, \"js\": $js_size, \"wasm\": $wasm_size } }"
     if [[ "$JSON" == "[" ]]; then
         JSON="$JSON"$'\n  '"$entry"
     else
