@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>How to - One Page Wasm</title>
+    </head>
+    <body>
+        <h1>One Page Wasm - How to</h1>
+        <section>
+            <h3>Write a Rust crate</h3>
+            <p>It should expose a single function:</p>
+            <p>
+                <pre>#[wasm_bindgen]
+pub fn frame(frame_buffer: &mut [u8], key_down: bool) {
+    // Your code here...
+}</pre>
+            </p>
+            <h3>Compile to WebAssembly with <code>wasm-pack build</code></h3>
+        </section>
+    </body>
+</html>
+

@@ -43,15 +43,12 @@
         <h1>One Page Wasm</h1>
         <section>
             <h2>Rules</h2>
-            <h3>Write a Rust crate</h3>
-            <p>It should expose a single function:</p>
-            <p>
-                <pre>#[wasm_bindgen]
-pub fn frame(frame_buffer: &mut [u8], key_down: bool) {
-    // Your code here...
-}</pre>
-            </p>
-            <h3>Compile to WebAssembly with <code>wasm-pack build</code></h3>
+            <ol>
+                <li>Maximum one wasm page code size (65536 bytes)
+                <li>One page of pixels (256 x 256)
+                <li>One button input (on or off)
+            </ol>
+            <p>See <a href="howto.html">howto</a> for more information.
         </section>
         <section>
             <h2>Entries</h2>
