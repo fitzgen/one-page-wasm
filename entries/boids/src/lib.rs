@@ -196,6 +196,24 @@ const COLORS: &[Color] = &[
         b: 5,
         a: 255,
     },
+    Color {
+        r: 230,
+        g: 10,
+        b: 10,
+        a: 255,
+    },
+    Color {
+        r: 10,
+        g: 230,
+        b: 10,
+        a: 255,
+    },
+    Color {
+        r: 10,
+        g: 10,
+        b: 230,
+        a: 255,
+    },
 ];
 
 const WIDTH: usize = 256;
