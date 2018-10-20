@@ -86,3 +86,8 @@ done
 JSON="$JSON"$'\n]'
 
 echo "$JSON" > "../projects.json"
+
+# Let CI deployment push built files.
+if test "$CI" != ""; then
+    git rm .gitignore
+fi
