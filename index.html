@@ -43,7 +43,15 @@
         <h1>One Page Wasm</h1>
         <section>
             <h2>Rules</h2>
-            TODO
+            <h3>Write a Rust crate</h3>
+            <p>It should expose a single function:</p>
+            <p>
+                <pre>#[wasm_bindgen]
+pub fn frame(frame_buffer: &mut [u8], key_down: bool) {
+    // Your code here...
+}</pre>
+            </p>
+            <h3>Compile to WebAssembly with <code>wasm-pack build</code></h3>
         </section>
         <section>
             <h2>Entries</h2>
