@@ -65,7 +65,7 @@ pub fn frame(frame_buffer: &mut [u8], key_down: bool) {
 
     for (pixel, iter) in frame_buffer.chunks_mut(4).zip(mandelbrot.iter()) {
         let color = hsl::HSL {
-            h: (((*iter as usize * 20 + time) * 1) % 360) as f64,
+            h: ((((*iter as usize * 20 - time) % 360) + 360) % 360) as f64,
             s: 0.7,
             l: 0.7,
         }.to_rgb();
