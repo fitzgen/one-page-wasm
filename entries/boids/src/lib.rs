@@ -208,9 +208,9 @@ fn set_pixel(buf: &mut [u8], x: usize, y: usize, color: Color) {
     }
     let a = (color.a as f64) / 255.0;
     let idx = x * 4 + y * WIDTH * 4;
-    buf[idx + 0] = (buf[idx + 0] as f64 * (1.0 - a) + color.r as f64 * a) as u8;
-    buf[idx + 1] = (buf[idx + 1] as f64 * (1.0 - a) + color.g as f64 * a) as u8;
-    buf[idx + 2] = (buf[idx + 2] as f64 * (1.0 - a) + color.b as f64 * a) as u8;
+    buf[idx + 0] = (buf[idx + 0] as f64 * (1.0 - a) + color.r as f64 * a).ceil() as u8;
+    buf[idx + 1] = (buf[idx + 1] as f64 * (1.0 - a) + color.g as f64 * a).ceil() as u8;
+    buf[idx + 2] = (buf[idx + 2] as f64 * (1.0 - a) + color.b as f64 * a).ceil() as u8;
     buf[idx + 3] = 255;
 }
 
