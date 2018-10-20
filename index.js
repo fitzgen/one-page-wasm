@@ -5,32 +5,19 @@ async function getProjects() {
 
 const entries = document.getElementById("entries");
 function renderProject(project) {
-  const projectUrl = `./built/${project.name}/dist/index.html`;
   const li = document.createElement("li");
+  li.innerHTML = `
+    <a href="./built/${project.name}/dist/index.html">
+      <h3>${project.name}</h3>
+      <p><code>${project.size.total}</code> bytes</p>
+      <iframe src="./built/${project.name}/dist/index.html"></iframe>
+      <div class="iframe-overlay"></div>
+    </a>
+  `;
 
-  const a = document.createElement("a");
-  a.href = projectUrl;
+  const iframe = li.querySelector("iframe");
+  iframe.addEventListener("load", () => iframe.contentWindow.postMessage({}, "*"));
 
-  const h3 = document.createElement("h3");
-  h3.textContent = project.name;
-
-  const p = document.createElement("p");
-  const code = document.createElement("code");
-  code.textContent = `${project.size.total}`;
-  p.appendChild(code);
-  const text = document.createTextNode(" bytes");
-  p.appendChild(text);
-
-  const iframe = document.createElement("iframe");
-  iframe.src = projectUrl;
-  iframe.addEventListener("load", () => {
-    iframe.contentWindow.postMessage({}, "*");
-  });
-
-  a.appendChild(h3);
-  a.appendChild(p);
-  a.append(iframe);
-  li.appendChild(a);
   entries.appendChild(li);
 }
 

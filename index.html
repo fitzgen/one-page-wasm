@@ -4,14 +4,26 @@
         <meta charset="utf-8"/>
         <title>One Page Wasm</title>
         <style>
-         iframe {
+         iframe,
+         .iframe-overlay {
              width: 256px;
              height: 256px;
              padding: none;
-             margin-right: 64px;
+             margin: none;
+         }
+
+         iframe {
              overflow: hidden;
              border: none;
              box-shadow: 3px 3px 10px black;
+             z-index: -1;
+         }
+
+         .iframe-overlay {
+             position: relative;
+             top: -256px;
+             z-index: 1;
+             background: rgba(0,0,0,0);
          }
 
          #entries {
@@ -20,6 +32,10 @@
              justify-content: center;
              flex-direction: row;
              list-style-type: none;
+         }
+
+         #entries > li > a {
+             padding: 32px;
          }
         </style>
     </head>
