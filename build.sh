@@ -66,6 +66,7 @@ for x in *; do
     sed -i -e "s|XXX_JS_SIZE|$js_size|g" bootstrap.js index.html
     sed -i -e "s|XXX_WASM_SIZE|$wasm_size|g" bootstrap.js index.html
     sed -i -e "s|XXX_TOTAL_SIZE|$total_size|g" bootstrap.js index.html
+    sed -i -e "s|XXX_SOURCE|https://github.com/fitzgen/one-page-wasm/tree/master/entries/$x|g" bootstrap.js index.html
 
     # Build the bundle with webpack!
     "$ROOT/node_modules/.bin/webpack" --config webpack.config.js >> log.txt 2>&1 || {
