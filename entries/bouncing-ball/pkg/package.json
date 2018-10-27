@@ -1,0 +1,15 @@
+{
+  "name": "bouncing-ball",
+  "collaborators": [
+    "Nick Fitzgerald <fitzgen@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "bouncing_ball_bg.wasm",
+    "bouncing_ball.js",
+    "bouncing_ball.d.ts"
+  ],
+  "module": "bouncing_ball.js",
+  "types": "bouncing_ball.d.ts",
+  "sideEffects": "false"
+}

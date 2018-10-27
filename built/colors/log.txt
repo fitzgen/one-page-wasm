@@ -1,0 +1,13 @@
+Hash: 3d32cc82477251cfd381
+Version: webpack 4.21.0
+Time: 231ms
+Built at: 2018-10-27 14:03:25
+                           Asset          Size  Chunks             Chunk Names
+                    bootstrap.js      11.9 KiB    main  [emitted]  main
+                  0.bootstrap.js      2.89 KiB       0  [emitted]  
+2b92b9cc435d71d8bc8a.module.wasm  unknown size       0  [emitted]  
+                      index.html     921 bytes          [emitted]  
+Entrypoint main = bootstrap.js
+[./bootstrap.js] 1.29 KiB {main} [built]
+[./colors.js] 1.09 KiB {0} [built]
+[./colors_bg.wasm] 14.7 KiB {0} [built]

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>colors</title>
+    <style>
+     html, body {
+         padding: 0;
+         margin: 0;
+         height: 100%;
+         width: 100%;
+     }
+
+     body {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         flex-direction: column;
+     }
+
+     #canvas {
+         box-shadow: 3px 3px 10px black;
+         margin: auto auto;
+     }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h1>colors</h1>
+      <p>Size of <code>.wasm</code> = <code>15003</code> bytes</p>
+      <p>Size of <code>.js</code> glue = <code>1121</code> bytes</p>
+      <p><b>Total size = <code>16124/65536</code> bytes</b></p>
+      <p><a href="https://github.com/fitzgen/one-page-wasm/tree/master/entries/colors">Source</a></p>
+    </section>
+    <canvas id="canvas"></canvas>
+    <script src="./bootstrap.js"></script>
+  </body>
+</html>

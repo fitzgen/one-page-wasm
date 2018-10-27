@@ -1,0 +1,15 @@
+{
+  "name": "colors",
+  "collaborators": [
+    "Nick Fitzgerald <fitzgen@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "colors_bg.wasm",
+    "colors.js",
+    "colors.d.ts"
+  ],
+  "module": "colors.js",
+  "types": "colors.d.ts",
+  "sideEffects": "false"
+}

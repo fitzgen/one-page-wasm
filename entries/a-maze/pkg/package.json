@@ -1,0 +1,15 @@
+{
+  "name": "a-maze",
+  "collaborators": [
+    "Johannes Hoff <johshoff@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "a_maze_bg.wasm",
+    "a_maze.js",
+    "a_maze.d.ts"
+  ],
+  "module": "a_maze.js",
+  "types": "a_maze.d.ts",
+  "sideEffects": "false"
+}

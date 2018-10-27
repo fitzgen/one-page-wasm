@@ -1,0 +1,15 @@
+{
+  "name": "boids",
+  "collaborators": [
+    "Nick Fitzgerald <fitzgen@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "boids_bg.wasm",
+    "boids.js",
+    "boids.d.ts"
+  ],
+  "module": "boids.js",
+  "types": "boids.d.ts",
+  "sideEffects": "false"
+}

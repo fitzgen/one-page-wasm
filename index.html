@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>One Page Wasm</title>
+        <style>
+         iframe {
+             width: 256px;
+             height: 256px;
+             padding: none;
+             margin: none;
+             overflow: hidden;
+             border: none;
+             box-shadow: 3px 3px 10px black;
+             z-index: -1;
+         }
+
+         .iframe-overlay {
+             width: 256px;
+             height: 256px;
+             padding: none;
+             margin: none;
+             margin-bottom: -256px;
+             position: relative;
+             top: -256px;
+             z-index: 1;
+             background: rgba(0,0,0,0);
+         }
+
+         #entries {
+             display: flex;
+             flex-wrap: wrap;
+             align-items: center;
+             justify-content: center;
+             flex-direction: row;
+             list-style-type: none;
+         }
+
+         #entries > li > a {
+             padding: 32px;
+         }
+        </style>
+    </head>
+    <body>
+        <h1>One Page Wasm</h1>
+        <section>
+            <h2>Rules</h2>
+            <ol>
+                <li>Maximum one wasm page code size (65536 bytes)</li>
+                <li>A frame buffer with one wasm page of pixels (256 x 256 = 65536 pixels)</li>
+                <li>One button input (on or off)</li>
+            </ol>
+            <p>See <a href="howto.html">howto</a> for more information.
+        </section>
+        <section>
+            <h2>Entries</h2>
+            <ul id="entries">
+            </ul>
+        </section>
+        <script src="index.js"></script>
+    </body>
+</html>

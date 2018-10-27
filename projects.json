@@ -1,0 +1,8 @@
+[
+  { "name": "a-maze", "size": { "total": 13828, "js": 1284, "wasm": 12544 } },
+  { "name": "boids", "size": { "total": 43958, "js": 1120, "wasm": 42838 } },
+  { "name": "bouncing-ball", "size": { "total": 12344, "js": 1128, "wasm": 11216 } },
+  { "name": "colors", "size": { "total": 16124, "js": 1121, "wasm": 15003 } },
+  { "name": "mandelbrot", "size": { "total": 15022, "js": 1125, "wasm": 13897 } },
+  { "name": "nebula-gen", "size": { "total": 38535, "js": 1393, "wasm": 37142 } }
+]

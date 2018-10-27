@@ -1,0 +1,13 @@
+Hash: 6cea1e4fa9d369799d87
+Version: webpack 4.21.0
+Time: 400ms
+Built at: 2018-10-27 14:07:04
+                           Asset          Size  Chunks             Chunk Names
+                    bootstrap.js      12.1 KiB    main  [emitted]  main
+                  0.bootstrap.js      3.42 KiB       0  [emitted]  
+dc3a9638e838905f6855.module.wasm  unknown size       0  [emitted]  
+                      index.html     933 bytes          [emitted]  
+Entrypoint main = bootstrap.js
+[./bootstrap.js] 1.29 KiB {main} [built]
+[./nebula_gen.js] 1.36 KiB {0} [built]
+[./nebula_gen_bg.wasm] 36.3 KiB {0} [built]

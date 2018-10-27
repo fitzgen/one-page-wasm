@@ -1,0 +1,13 @@
+Hash: e1062d90f3d6c62986c0
+Version: webpack 4.21.0
+Time: 276ms
+Built at: 2018-10-27 14:05:12
+                           Asset          Size  Chunks             Chunk Names
+                    bootstrap.js      11.9 KiB    main  [emitted]  main
+                  0.bootstrap.js      2.96 KiB       0  [emitted]  
+3e38d19bbf4206db2e72.module.wasm  unknown size       0  [emitted]  
+                      index.html     933 bytes          [emitted]  
+Entrypoint main = bootstrap.js
+[./bootstrap.js] 1.29 KiB {main} [built]
+[./mandelbrot.js] 1.1 KiB {0} [built]
+[./mandelbrot_bg.wasm] 13.6 KiB {0} [built]

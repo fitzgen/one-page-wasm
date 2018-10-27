@@ -1,0 +1,13 @@
+Hash: 4a9b2acb86db87c740ed
+Version: webpack 4.21.0
+Time: 260ms
+Built at: 2018-10-27 14:01:37
+                           Asset          Size  Chunks             Chunk Names
+                    bootstrap.js      11.9 KiB    main  [emitted]  main
+                  0.bootstrap.js      3.02 KiB       0  [emitted]  
+32f2180deb13484cfbb5.module.wasm  unknown size       0  [emitted]  
+                      index.html     942 bytes          [emitted]  
+Entrypoint main = bootstrap.js
+[./bootstrap.js] 1.29 KiB {main} [built]
+[./bouncing_ball.js] 1.1 KiB {0} [built]
+[./bouncing_ball_bg.wasm] 11 KiB {0} [built]

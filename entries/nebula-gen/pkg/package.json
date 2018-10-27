@@ -1,0 +1,15 @@
+{
+  "name": "nebula-gen",
+  "collaborators": [
+    "Nick Fitzgerald <fitzgen@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "nebula_gen_bg.wasm",
+    "nebula_gen.js",
+    "nebula_gen.d.ts"
+  ],
+  "module": "nebula_gen.js",
+  "types": "nebula_gen.d.ts",
+  "sideEffects": "false"
+}
