@@ -44,18 +44,12 @@ impl Boid {
     const RADIUS: f64 = 30.0;
 
     fn draw(&self, buf: &mut [u8]) {
-        let velocity = [self.direction.sin(), self.direction.cos()];
-        let x = self.position[0];
-        let y = self.position[1];
-        for i in 0..1_i32 {
-            let i = i as f64;
-            set_pixel(
-                buf,
-                (x + velocity[0] * i) as usize,
-                (y + velocity[1] * i) as usize,
-                self.color,
-            );
-        }
+        set_pixel(
+            buf,
+            self.position[0] as usize,
+            self.position[1] as usize,
+            self.color,
+        );
     }
 
     fn next(&self, me: usize, flock: &[Boid]) -> Boid {
