@@ -14,9 +14,20 @@ const HEIGHT: usize = 256;
 const NUM_CELLS: usize = 64;
 const MAX_VELOCITY: f64 = 1.25;
 
+// wrap_distance is the shortest distance between two 1D-points in a wrap-around space
+fn wrap_distance(distance: f64) -> f64 {
+    assert!(WIDTH == HEIGHT);
+
+    match distance {
+        d if d < -(WIDTH as f64 / 2.0) => WIDTH as f64 + d,
+        d if d > WIDTH as f64 / 2.0 => d - WIDTH as f64,
+        d => d,
+    }
+}
+
 // Distance between two points.
 fn distance(a: [f64; 2], b: [f64; 2]) -> f64 {
-    ((b[0] - a[0]).powi(2) + (b[1] - a[1]).powi(2)).sqrt()
+    (wrap_distance(b[0] - a[0]).powi(2) + wrap_distance(b[1] - a[1]).powi(2)).sqrt()
 }
 
 // Make a vector field from cellular noise. Generate some random center points
@@ -42,7 +53,7 @@ fn make_distance_vector_field() -> Vec<[f64; 2]> {
                 }
             }
 
-            field[x + y * WIDTH] = [this_pos[0] - closest[0], this_pos[1] - closest[1]];
+            field[x + y * WIDTH] = [wrap_distance(this_pos[0] - closest[0]), wrap_distance(this_pos[1] - closest[1])];
         }
     }
 
@@ -149,15 +160,6 @@ pub fn frame(frame_buffer: &mut [u8], key_down: bool) {
 
         let v = vec_field[x + y * WIDTH];
 
-        // Don't let points get stuck on the outer edges, which they otherwise
-        // tend to do.
-        if x == 0 || x == 255 {
-            p.pos[0] = js_sys::Math::random() * 255.0;
-        }
-        if y == 0 || y == 255 {
-            p.pos[1] = js_sys::Math::random() * 255.0;
-        }
-
         // Update the point's velocity based on looking up its position in the
         // vector field.
         p.vel[0] += v[0] / 362.0;
@@ -166,10 +168,11 @@ pub fn frame(frame_buffer: &mut [u8], key_down: bool) {
         p.vel[1] = clamp_vel(p.vel[1]);
 
         // Update the point's position based on its current velocity.
-        p.pos[0] += p.vel[0];
+        // Add WIDTH/HEIGHT before the modulus to ensure non-negative numbers
+        p.pos[0] += p.vel[0] + WIDTH as f64;
         p.pos[0] %= WIDTH as f64;
-        p.pos[1] += p.vel[1];
-        p.pos[1] %= WIDTH as f64;
+        p.pos[1] += p.vel[1] + HEIGHT as f64;
+        p.pos[1] %= HEIGHT as f64;
 
         // Find the new index for this point within the frame buffer.
         let x = p.pos[0].round() as usize % WIDTH;
